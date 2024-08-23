@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "38d555f4-c73e-4fed-9ca3-ddca99a01b99",
+		"name": "freight simulator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37779960"
+	},
+	"item": [
+		{
+			"name": "addresses",
+			"item": [
+				{
+					"name": "creates an address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"zipCode\": \"12345-678\",\n  \"street\": \"Fake Street Luiz22\",\n  \"number\": \"42\",\n  \"complement\": \"Apt 101\",\n  \"neighborhood\": \"Faketown\",\n  \"city\": \"Fiction City\",\n  \"state\": \"FS\",\n  \"country\": \"Fakeland\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/addresses"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "freight-operators",
+			"item": [
+				{
+					"name": "creates a Freight Operator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Operador 3\",\n  \"phoneNumber\": \"+1234567890\",\n  \"email\": \"johndoe@example.com\",\n  \"cubageFactor\": 8000,\n  \"deliverSettings\": [\n    {\n      \"initialDistance\": 0,\n      \"finalDistance\": 100,\n      \"multipleofDistance\": 2,\n      \"daysToDeliver\": 2\n    },\n    {\n      \"initialDistance\": 111,\n      \"finalDistance\": 200,\n      \"multipleofDistance\": 3,\n      \"daysToDeliver\": 10\n    }\n  ],\n  \"address\": {\n    \"zipCode\": \"12345-678\",\n    \"street\": \"123 Main St\",\n    \"number\": \"456\",\n    \"complement\": \"Apt 789\",\n    \"neighborhood\": \"Downtown\",\n    \"city\": \"Example City\",\n    \"state\": \"EX\",\n    \"country\": \"Countryland\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/freight-operators"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shopkeepers",
+			"item": [
+				{
+					"name": "creates a shopkeeper",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Logista\",\n  \"phoneNumber\": \"123-456-7890\",\n  \"email\": \"johndoe@example.com\",\n  \"address\": {\n    \"zipCode\": \"12345-678\",\n    \"street\": \"Main St\",\n    \"number\": \"100\",\n    \"complement\": \"Apt 101\",\n    \"neighborhood\": \"Downtown\",\n    \"city\": \"CityName\",\n    \"state\": \"ST\",\n    \"country\": \"Country\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/shopkeepers"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "freight-quote",
+			"item": [
+				{
+					"name": "crates a freight quote",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"collectionAddress\": {\n        \"zipCode\": \"12345-678\",\n        \"street\": \"Rua Exemplo\",\n        \"number\": \"123\",\n        \"complement\": \"Apto 101\",\n        \"neighborhood\": \"Bairro Exemplo\",\n        \"city\": \"Cidade Exemplo\",\n        \"state\": \"EX\",\n        \"country\": \"País Exemplo\"\n    },\n    \"deliveryAddress\": {\n        \"zipCode\": \"98765-432\",\n        \"street\": \"Avenida Exemplo\",\n        \"number\": \"456\",\n        \"complement\": \"Bloco B\",\n        \"neighborhood\": \"Bairro Exemplo\",\n        \"city\": \"Cidade Exemplo\",\n        \"state\": \"EX\",\n        \"country\": \"País Exemplo\"\n    },\n    \"heightCM\": 100,\n    \"widthCM\": 100,\n    \"lengthCM\": 100,\n    \"shopkeeperId\": \"4263dfb5-6574-4a3e-90e6-2a1bf2d1e6a8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:3000/freight-quotes"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
