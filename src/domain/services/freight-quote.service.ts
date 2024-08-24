@@ -68,7 +68,6 @@ export class FreightQuoteService {
       collectionAddress: createFreightQuoteDto.collectionAddress,
     };
 
-    console.log('chegou aqui');
     const resp = await this.freightQuoteRepo.create(data);
 
     return resp;
