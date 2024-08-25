@@ -6,6 +6,7 @@ import typeorm from './infra/database/typeorm';
 import { FreightOperatorModule } from './modules/freight-operator/freight-operator.module';
 import { FreightQuoteModule } from './modules/freight-quote/freight-quote.module';
 import { ShopkeeperModule } from './modules/shopkeeper/shopkeeper.module';
+import { GeocodingModule } from './modules/geocoding/geocoding.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ShopkeeperModule } from './modules/shopkeeper/shopkeeper.module';
     ShopkeeperModule,
     FreightOperatorModule,
     FreightQuoteModule,
+    GeocodingModule,
   ],
 })
 export class AppModule {}

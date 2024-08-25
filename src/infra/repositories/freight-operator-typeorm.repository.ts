@@ -37,7 +37,7 @@ export class FreightOperatorTypeOrmRepository
     }
 
     let cheapestOperator: FreightOperatorSchema | null = null;
-    let totalCost = Infinity;
+    let totalCost = null;
     let daysToDeliver = 0;
 
     for (const operator of freightOperators) {
@@ -55,8 +55,8 @@ export class FreightOperatorTypeOrmRepository
 
       const cost = costPerCubicWeight * deliverySetting.multipleofDistance;
 
-      if (cost < totalCost) {
-        totalCost = Math.round(totalCost);
+      if (totalCost === null || totalCost < cost) {
+        totalCost = Math.round(cost);
         cheapestOperator = operator;
         daysToDeliver = deliverySetting.daysToDeliver;
       }
@@ -89,7 +89,7 @@ export class FreightOperatorTypeOrmRepository
     }
 
     let fastestOperator: FreightOperatorSchema | null = null;
-    let shortestDaysToDeliver = Infinity;
+    let shortestDaysToDeliver = null;
     let totalCost = 0;
 
     for (const operator of freightOperators) {
@@ -106,7 +106,10 @@ export class FreightOperatorTypeOrmRepository
 
           const cost = costPerCubicWeight * setting.multipleofDistance;
 
-          if (setting.daysToDeliver < shortestDaysToDeliver) {
+          if (
+            shortestDaysToDeliver === null ||
+            shortestDaysToDeliver > setting.daysToDeliver
+          ) {
             shortestDaysToDeliver = setting.daysToDeliver;
             fastestOperator = operator;
             totalCost = Math.round(cost);

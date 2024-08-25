@@ -2,6 +2,7 @@ import { FreightQuote } from '../entities/freight-quote.entity';
 import { FreightQuoteRepository } from '../repositories/freight-quote.repository';
 import { CreateFreightQuoteDto } from './dtos/create-freight-quote.dto';
 import { FreightOperatorService } from './freight-operator.service';
+import { GeocodingService } from './geocoding.service';
 import { ShopkeeperService } from './shopkeeper.service';
 
 export class FreightQuoteService {
@@ -9,6 +10,7 @@ export class FreightQuoteService {
     private freightQuoteRepo: FreightQuoteRepository,
     private shopkeeperService: ShopkeeperService,
     private freightOperatorService: FreightOperatorService,
+    private geocodingService: GeocodingService,
   ) {}
 
   async create(
@@ -22,7 +24,12 @@ export class FreightQuoteService {
       throw new Error('Shopkeeper not found');
     }
 
-    const distanceKM = 100;
+    const distanceKM = await this.geocodingService.calculateDistanceByAddresses(
+      {
+        from: createFreightQuoteDto.collectionAddress,
+        to: createFreightQuoteDto.deliveryAddress,
+      },
+    );
 
     const cubicWeight =
       createFreightQuoteDto.heightCM *
@@ -31,8 +38,8 @@ export class FreightQuoteService {
 
     const {
       operator: cheapestOperator,
-      totalCost: fastestDaysToDelivery,
-      daysToDeliver: fastestTotalCost,
+      totalCost: cheapestDaysToDelivery,
+      daysToDeliver: cheapestTotalCost,
     } = await this.freightOperatorService.getMoreCheapOperator({
       distanceKM,
       cubicWeight,
@@ -44,8 +51,8 @@ export class FreightQuoteService {
 
     const {
       operator: fastestOperator,
-      totalCost: cheapestTotalCost,
-      daysToDeliver: cheapestDaysToDelivery,
+      totalCost: fastestTotalCost,
+      daysToDeliver: fastestDaysToDelivery,
     } = await this.freightOperatorService.getMoreFastOperator({
       distanceKM,
       cubicWeight,
@@ -54,10 +61,10 @@ export class FreightQuoteService {
     const data = {
       moreFastOperator: fastestOperator,
       moreFastDaysToDelivery: fastestDaysToDelivery,
-      moreFastTotalCost: cheapestTotalCost,
+      moreFastTotalCost: fastestTotalCost,
       moreCheapOperator: cheapestOperator,
       moreCheapDaysToDelivery: cheapestDaysToDelivery,
-      moreCheapTotalCost: fastestTotalCost,
+      moreCheapTotalCost: cheapestTotalCost,
       shopkeeper: shopkeeper,
       heightCM: createFreightQuoteDto.heightCM,
       widthCM: createFreightQuoteDto.widthCM,
