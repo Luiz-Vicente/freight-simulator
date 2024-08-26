@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AddressController } from './address.controller';
 import { getDataSourceToken, TypeOrmModule } from '@nestjs/typeorm';
-import { AddressSchema } from 'src/infra/schemas/address.schema';
-import { AddressTypeOrmRepository } from 'src/infra/repositories/address-typeorm.repository';
+import { AddressSchema } from 'src/infra/persistence/schemas/address.schema';
+import { AddressTypeOrmRepository } from 'src/infra/persistence/repositories/address-typeorm.repository';
 import { DataSource } from 'typeorm';
 import { AddressService } from 'src/domain/services/address.service';
 

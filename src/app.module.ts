@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AddressModule } from './modules/address/address.module';
-import typeorm from './infra/database/typeorm';
+import typeorm from './infra/configuration/database/typeorm';
 import { FreightOperatorModule } from './modules/freight-operator/freight-operator.module';
 import { FreightQuoteModule } from './modules/freight-quote/freight-quote.module';
 import { ShopkeeperModule } from './modules/shopkeeper/shopkeeper.module';

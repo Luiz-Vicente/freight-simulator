@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { getDataSourceToken, TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { FreightOperatorTypeOrmRepository } from 'src/infra/repositories/freight-operator-typeorm.repository';
-import { FreightOperatorSchema } from 'src/infra/schemas/freight-operator.schema';
+import { FreightOperatorTypeOrmRepository } from 'src/infra/persistence/repositories/freight-operator-typeorm.repository';
+import { FreightOperatorSchema } from 'src/infra/persistence/schemas/freight-operator.schema';
 import { FreightOperatorController } from './freight-operator.controller';
 import { FreightOperatorService } from 'src/domain/services/freight-operator.service';
 

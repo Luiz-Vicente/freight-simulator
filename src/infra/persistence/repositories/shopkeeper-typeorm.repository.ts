@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { ShopkeeperRepository } from 'src/domain/repositories/shopkeeper.repository';
-import { ShopkeeperSchema } from '../schemas/shopkeeper.schema';
 import { Shopkeeper } from 'src/domain/entities/shopkeeper.entity';
+import { ShopkeeperSchema } from '../schemas/shopkeeper.schema';
 
 export class ShopkeeperTypeOrmRepository implements ShopkeeperRepository {
   constructor(private ormRepo: Repository<ShopkeeperSchema>) {}

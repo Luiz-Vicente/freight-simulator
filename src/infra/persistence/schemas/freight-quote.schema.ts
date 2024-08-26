@@ -8,9 +8,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { FreightOperatorSchema } from './freight-operator.schema';
-import { ShopkeeperSchema } from './shopkeeper.schema';
 import { DeliveryAddressSchema } from './delivery-address.schema';
 import { CollectionAddressSchema } from './collection-address.schema';
+import { ShopkeeperSchema } from './shopkeeper.schema';
 
 @Entity('freight_quotes')
 export class FreightQuoteSchema {

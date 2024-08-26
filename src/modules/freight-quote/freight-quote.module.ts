@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { getDataSourceToken, TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { FreightQuoteSchema } from 'src/infra/schemas/freight-quote.schema';
+import { FreightQuoteSchema } from 'src/infra/persistence/schemas/freight-quote.schema';
 import { FreightQuoteService } from 'src/domain/services/freight-quote.service';
-import { FreightQuoteTypeOrmRepository } from 'src/infra/repositories/freight-quote-typeorm.repository';
+import { FreightQuoteTypeOrmRepository } from 'src/infra/persistence/repositories/freight-quote-typeorm.repository';
 import { FreightQuoteController } from './freight-quote.controller';
 import { ShopkeeperModule } from '../shopkeeper/shopkeeper.module';
 import { ShopkeeperService } from 'src/domain/services/shopkeeper.service';
