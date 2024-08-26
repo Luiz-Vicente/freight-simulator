@@ -40,13 +40,13 @@ export class FreightOperatorSchema {
 
   @OneToMany(
     () => FreightQuoteSchema,
-    (freightQuote) => freightQuote.moreFastOperator,
+    (freightQuote) => freightQuote.fastestOperator,
   )
   fastFreightQuotes: FreightQuoteSchema[];
 
   @OneToMany(
     () => FreightQuoteSchema,
-    (freightQuote) => freightQuote.moreCheapOperator,
+    (freightQuote) => freightQuote.cheapestOperator,
   )
   cheapFreightQuotes: FreightQuoteSchema[];
 }

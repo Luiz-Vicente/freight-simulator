@@ -21,27 +21,27 @@ export class CreatesFreightQuotesTable1724024202844
             generationStrategy: 'uuid',
           },
           {
-            name: 'moreFastOperatorId',
+            name: 'fastestOperatorId',
             type: 'uuid',
           },
           {
-            name: 'moreFastDaysToDelivery',
+            name: 'fastestDaysForDelivery',
             type: 'int',
           },
           {
-            name: 'moreFastTotalCost',
+            name: 'fastestTotalCost',
             type: 'decimal',
           },
           {
-            name: 'moreCheapOperatorId',
+            name: 'cheapestOperatorId',
             type: 'uuid',
           },
           {
-            name: 'moreCheapDaysToDelivery',
+            name: 'cheapestDaysForDelivery',
             type: 'int',
           },
           {
-            name: 'moreCheapTotalCost',
+            name: 'cheapestTotalCost',
             type: 'decimal',
           },
           {
@@ -94,7 +94,7 @@ export class CreatesFreightQuotesTable1724024202844
     await queryRunner.createForeignKey(
       'freight_quotes',
       new TableForeignKey({
-        columnNames: ['moreFastOperatorId'],
+        columnNames: ['fastestOperatorId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'freight_operators',
         onDelete: 'CASCADE',
@@ -104,7 +104,7 @@ export class CreatesFreightQuotesTable1724024202844
     await queryRunner.createForeignKey(
       'freight_quotes',
       new TableForeignKey({
-        columnNames: ['moreCheapOperatorId'],
+        columnNames: ['cheapestOperatorId'],
         referencedColumnNames: ['id'],
         referencedTableName: 'freight_operators',
         onDelete: 'CASCADE',

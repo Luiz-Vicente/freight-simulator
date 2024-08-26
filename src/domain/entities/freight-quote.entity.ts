@@ -12,12 +12,12 @@ export interface FreightQuoteInterface {
   distanceKM: number;
   collectionAddress: CollectionAddress;
   deliveryAddress: DeliveryAddress;
-  moreCheapOperator: FreightOperator;
-  moreCheapTotalCost: number;
-  moreCheapDaysToDelivery: number;
-  moreFastOperator: FreightOperator;
-  moreFastTotalCost: number;
-  moreFastDaysToDelivery: number;
+  cheapestOperator: FreightOperator;
+  cheapestTotalCost: number;
+  cheapestDaysForDelivery: number;
+  fastestOperator: FreightOperator;
+  fastestTotalCost: number;
+  fastestDaysForDelivery: number;
   shopkeeper: Shopkeeper;
 }
 
@@ -30,12 +30,12 @@ export class FreightQuote {
   distanceKM: number;
   collectionAddress: CollectionAddress;
   deliveryAddress: DeliveryAddress;
-  moreCheapOperator: FreightOperator;
-  moreCheapTotalCost: number;
-  moreCheapDaysToDelivery: number;
-  moreFastOperator: FreightOperator;
-  moreFastTotalCost: number;
-  moreFastDaysToDelivery: number;
+  cheapestOperator: FreightOperator;
+  cheapestTotalCost: number;
+  cheapestDaysForDelivery: number;
+  fastestOperator: FreightOperator;
+  fastestTotalCost: number;
+  fastestDaysForDelivery: number;
   shopkeeper: Shopkeeper;
 
   constructor({
@@ -47,12 +47,12 @@ export class FreightQuote {
     distanceKM,
     collectionAddress,
     deliveryAddress,
-    moreCheapOperator,
-    moreCheapTotalCost,
-    moreCheapDaysToDelivery,
-    moreFastOperator,
-    moreFastTotalCost,
-    moreFastDaysToDelivery,
+    cheapestOperator,
+    cheapestTotalCost,
+    cheapestDaysForDelivery,
+    fastestOperator,
+    fastestTotalCost,
+    fastestDaysForDelivery,
   }: FreightQuoteInterface) {
     this.id = id;
     this.heightCM = heightCM;
@@ -62,11 +62,11 @@ export class FreightQuote {
     this.distanceKM = distanceKM;
     this.collectionAddress = collectionAddress;
     this.deliveryAddress = deliveryAddress;
-    this.moreCheapOperator = moreCheapOperator;
-    this.moreCheapTotalCost = moreCheapTotalCost;
-    this.moreCheapDaysToDelivery = moreCheapDaysToDelivery;
-    this.moreFastOperator = moreFastOperator;
-    this.moreFastTotalCost = moreFastTotalCost;
-    this.moreFastDaysToDelivery = moreFastDaysToDelivery;
+    this.cheapestOperator = cheapestOperator;
+    this.cheapestTotalCost = cheapestTotalCost;
+    this.cheapestDaysForDelivery = cheapestDaysForDelivery;
+    this.fastestOperator = fastestOperator;
+    this.fastestTotalCost = fastestTotalCost;
+    this.fastestDaysForDelivery = fastestDaysForDelivery;
   }
 }

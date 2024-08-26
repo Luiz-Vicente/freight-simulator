@@ -12,7 +12,7 @@ const config = {
   password: `${process.env.DB_PASSWORD}`,
   database: `${process.env.DB_NAME}`,
   entities: ['dist/infra/persistence/schemas/*.schema{.ts,.js}'],
-  migrations: ['dist/infra/persistance/migrations/*{.ts,.js}'],
+  migrations: ['dist/infra/persistence/migrations/*{.ts,.js}'],
   autoLoadEntities: false,
   synchronize: false,
 };

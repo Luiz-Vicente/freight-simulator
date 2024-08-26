@@ -17,7 +17,7 @@ export class FreightOperatorTypeOrmRepository
     return new FreightOperator(createdFreightOperator);
   }
 
-  async getMoreCheapOperator({
+  async getCheapest({
     distanceKM,
     cubicWeight,
   }: {
@@ -69,7 +69,7 @@ export class FreightOperatorTypeOrmRepository
     };
   }
 
-  async getMoreFastOperator({
+  async getFastest({
     distanceKM,
     cubicWeight,
   }: {

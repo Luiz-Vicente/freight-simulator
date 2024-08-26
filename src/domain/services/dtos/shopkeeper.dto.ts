@@ -6,3 +6,7 @@ export class CreateShopkeeperDto {
   email: string;
   address: Address;
 }
+
+export class FindShopeekerByIdDto {
+  id: string;
+}

@@ -5,7 +5,7 @@ import {
 
 export interface FreightOperatorRepository {
   create(freightOperator: FreightOperatorInterface): Promise<FreightOperator>;
-  getMoreCheapOperator({
+  getCheapest({
     distanceKM,
     cubicWeight,
   }: {
@@ -16,7 +16,7 @@ export interface FreightOperatorRepository {
     totalCost: number;
     daysToDeliver: number;
   }>;
-  getMoreFastOperator({
+  getFastest({
     distanceKM,
     cubicWeight,
   }: {

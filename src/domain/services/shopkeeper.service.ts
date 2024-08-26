@@ -1,6 +1,9 @@
 import { Shopkeeper } from '../entities/shopkeeper.entity';
 import { ShopkeeperRepository } from '../repositories/shopkeeper.repository';
-import { CreateShopkeeperDto } from './dtos/shopkeeper.dto';
+import {
+  CreateShopkeeperDto,
+  FindShopeekerByIdDto,
+} from './dtos/shopkeeper.dto';
 
 export class ShopkeeperService {
   constructor(private shopkeeperRepo: ShopkeeperRepository) {}
@@ -10,7 +13,7 @@ export class ShopkeeperService {
     return await this.shopkeeperRepo.create(newShopkeeper);
   }
 
-  async findById(id: string): Promise<Shopkeeper | null> {
-    return this.shopkeeperRepo.findById(id);
+  async findById(methodDto: FindShopeekerByIdDto): Promise<Shopkeeper | null> {
+    return this.shopkeeperRepo.findById(methodDto.id);
   }
 }

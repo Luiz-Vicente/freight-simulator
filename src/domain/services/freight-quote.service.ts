@@ -14,9 +14,9 @@ export class FreightQuoteService {
   ) {}
 
   async create(methodDto: CreateFreightQuoteDto): Promise<FreightQuote> {
-    const shopkeeper = await this.shopkeeperService.findById(
-      methodDto.shopkeeperId,
-    );
+    const shopkeeper = await this.shopkeeperService.findById({
+      id: methodDto.shopkeeperId,
+    });
 
     if (!shopkeeper) {
       throw new Error('Shopkeeper not found');
@@ -41,7 +41,7 @@ export class FreightQuoteService {
       operator: cheapestOperator,
       totalCost: cheapestTotalCost,
       daysToDeliver: cheapestDaysToDelivery,
-    } = await this.freightOperatorService.getMoreCheapOperator({
+    } = await this.freightOperatorService.getCheapest({
       distanceKM,
       cubicWeight,
     });
@@ -62,18 +62,18 @@ export class FreightQuoteService {
       operator: fastestOperator,
       totalCost: fastestTotalCost,
       daysToDeliver: fastestDaysToDelivery,
-    } = await this.freightOperatorService.getMoreFastOperator({
+    } = await this.freightOperatorService.getFastest({
       distanceKM,
       cubicWeight,
     });
 
     const freightQuote = {
-      moreFastOperator: fastestOperator,
-      moreFastDaysToDelivery: fastestDaysToDelivery,
-      moreFastTotalCost: fastestTotalCost,
-      moreCheapOperator: cheapestOperator,
-      moreCheapDaysToDelivery: cheapestDaysToDelivery,
-      moreCheapTotalCost: cheapestTotalCost,
+      fastestOperator: fastestOperator,
+      fastestDaysForDelivery: fastestDaysToDelivery,
+      fastestTotalCost: fastestTotalCost,
+      cheapestOperator: cheapestOperator,
+      cheapestDaysForDelivery: cheapestDaysToDelivery,
+      cheapestTotalCost: cheapestTotalCost,
       shopkeeper: shopkeeper,
       heightCM: methodDto.heightCM,
       widthCM: methodDto.widthCM,

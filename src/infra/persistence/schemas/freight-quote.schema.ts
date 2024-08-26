@@ -18,32 +18,32 @@ export class FreightQuoteSchema {
   id?: string;
 
   @ManyToOne(() => FreightOperatorSchema)
-  @JoinColumn({ name: 'moreFastOperatorId' })
-  moreFastOperator: FreightOperatorSchema;
+  @JoinColumn({ name: 'fastestOperatorId' })
+  fastestOperator: FreightOperatorSchema;
 
   @Column()
-  moreFastDaysToDelivery: number;
+  fastestDaysForDelivery: number;
 
   @Column('decimal', {
     precision: 10,
     scale: 2,
     default: 0.0,
   })
-  moreFastTotalCost: number;
+  fastestTotalCost: number;
 
   @ManyToOne(() => FreightOperatorSchema)
-  @JoinColumn({ name: 'moreCheapOperatorId' })
-  moreCheapOperator: FreightOperatorSchema;
+  @JoinColumn({ name: 'cheapestOperatorId' })
+  cheapestOperator: FreightOperatorSchema;
 
   @Column()
-  moreCheapDaysToDelivery: number;
+  cheapestDaysForDelivery: number;
 
   @Column('decimal', {
     precision: 10,
     scale: 2,
     default: 0.0,
   })
-  moreCheapTotalCost: number;
+  cheapestTotalCost: number;
 
   @ManyToOne(() => ShopkeeperSchema)
   @JoinColumn({ name: 'shopkeeperId' })
