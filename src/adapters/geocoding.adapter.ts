@@ -5,7 +5,7 @@ import {
 import { GeocodingAdapter } from 'src/domain/adapters/geocoding.adapter';
 import { Address } from 'src/domain/entities/address.entity';
 import { HttpClient } from 'src/domain/interfaces/http.client';
-import { CalculateDistanceDto } from 'src/domain/services/dtos/calculate-distance.dto';
+import { GetDistanceDto } from 'src/domain/services/dtos/distance.dto';
 import { Coordinates } from 'src/domain/types/coordinates';
 
 export class GoogleMapsGeocodingAdapter implements GeocodingAdapter {
@@ -37,10 +37,10 @@ export class GoogleMapsGeocodingAdapter implements GeocodingAdapter {
     };
   }
 
-  async calculateDistanceByCoordinates(
-    calculateDistanceDto: CalculateDistanceDto,
+  async getDistanceByCoordinates(
+    getDistanceDto: GetDistanceDto,
   ): Promise<number> {
-    const { from, to } = calculateDistanceDto;
+    const { from, to } = getDistanceDto;
     const response = await this.geocodingHttpClient.get<DistanceMatrixResponse>(
       'distancematrix/json',
       {

@@ -1,36 +1,32 @@
 import { GeocodingAdapter } from '../adapters/geocoding.adapter';
-import { Address } from '../entities/address.entity';
 import { Coordinates } from '../types/coordinates';
-import { CalculateDistanceDto } from './dtos/calculate-distance.dto';
+import { GetCoordinatesByAddressDto } from './dtos/coordinates-by-address.dto';
+import { GetDistanceByAddressesDto } from './dtos/distance-by-addresses.dto';
+import { GetDistanceDto } from './dtos/distance.dto';
 
 export class GeocodingService {
   constructor(private geocodingAdapter: GeocodingAdapter) {}
 
-  async getCoordinatesByAddress(address: Address): Promise<Coordinates> {
-    return this.geocodingAdapter.getCoordinatesByAddress(address);
+  async getCoordinatesByAddress(
+    methodDto: GetCoordinatesByAddressDto,
+  ): Promise<Coordinates> {
+    return await this.geocodingAdapter.getCoordinatesByAddress(methodDto);
   }
 
-  async calculateDistanceByCoordinates(
-    calculateDistanceDto: CalculateDistanceDto,
+  async getDistanceByCoordinates(methodDto: GetDistanceDto): Promise<number> {
+    return await this.geocodingAdapter.getDistanceByCoordinates(methodDto);
+  }
+
+  async getDistanceByAddresses(
+    methodDto: GetDistanceByAddressesDto,
   ): Promise<number> {
-    return this.geocodingAdapter.calculateDistanceByCoordinates(
-      calculateDistanceDto,
-    );
-  }
+    const { from, to } = methodDto;
 
-  async calculateDistanceByAddresses({
-    from,
-    to,
-  }: {
-    from: Address;
-    to: Address;
-  }): Promise<number> {
     const fromCoordinates = await this.getCoordinatesByAddress(from);
     const toCoordinates = await this.getCoordinatesByAddress(to);
 
-    return this.calculateDistanceByCoordinates({
-      from: fromCoordinates,
-      to: toCoordinates,
-    });
+    const coordinates = { from: fromCoordinates, to: toCoordinates };
+
+    return await this.getDistanceByCoordinates(coordinates);
   }
 }

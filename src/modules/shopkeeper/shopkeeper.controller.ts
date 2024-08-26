@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateShopkeeperDto } from 'src/domain/services/dtos/create-shopkeeper.dto';
+import { CreateShopkeeperDto } from 'src/domain/services/dtos/shopkeeper.dto';
 import { ShopkeeperService } from 'src/domain/services/shopkeeper.service';
 
 @Controller('shopkeepers')

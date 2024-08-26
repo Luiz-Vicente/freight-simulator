@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateFreightQuoteDto } from 'src/domain/services/dtos/create-freight-quote.dto';
+import { CreateFreightQuoteDto } from 'src/domain/services/dtos/freight-quote.dto';
 import { FreightQuoteService } from 'src/domain/services/freight-quote.service';
 
 @Controller('freight-quotes')

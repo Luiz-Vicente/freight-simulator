@@ -1,6 +1,6 @@
 import { Coordinates } from 'src/domain/types/coordinates';
 
-export interface CalculateDistanceDto {
+export interface GetDistanceDto {
   from: Coordinates;
   to: Coordinates;
 }

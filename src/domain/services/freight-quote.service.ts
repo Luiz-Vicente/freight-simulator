@@ -1,6 +1,6 @@
 import { FreightQuote } from '../entities/freight-quote.entity';
 import { FreightQuoteRepository } from '../repositories/freight-quote.repository';
-import { CreateFreightQuoteDto } from './dtos/create-freight-quote.dto';
+import { CreateFreightQuoteDto } from './dtos/freight-quote.dto';
 import { FreightOperatorService } from './freight-operator.service';
 import { GeocodingService } from './geocoding.service';
 import { ShopkeeperService } from './shopkeeper.service';
@@ -13,33 +13,34 @@ export class FreightQuoteService {
     private geocodingService: GeocodingService,
   ) {}
 
-  async create(
-    createFreightQuoteDto: CreateFreightQuoteDto,
-  ): Promise<FreightQuote> {
+  async create(methodDto: CreateFreightQuoteDto): Promise<FreightQuote> {
     const shopkeeper = await this.shopkeeperService.findById(
-      createFreightQuoteDto.shopkeeperId,
+      methodDto.shopkeeperId,
     );
 
     if (!shopkeeper) {
       throw new Error('Shopkeeper not found');
     }
 
-    const distanceKM = await this.geocodingService.calculateDistanceByAddresses(
-      {
-        from: createFreightQuoteDto.collectionAddress,
-        to: createFreightQuoteDto.deliveryAddress,
-      },
-    );
+    const addresses = {
+      from: methodDto.collectionAddress,
+      to: methodDto.deliveryAddress,
+    };
+
+    const distanceKM =
+      await this.geocodingService.getDistanceByAddresses(addresses);
+
+    if (!distanceKM) {
+      throw new Error('Cannot calculate distance between addresses');
+    }
 
     const cubicWeight =
-      createFreightQuoteDto.heightCM *
-      createFreightQuoteDto.widthCM *
-      createFreightQuoteDto.lengthCM;
+      methodDto.heightCM * methodDto.widthCM * methodDto.lengthCM;
 
     const {
       operator: cheapestOperator,
-      totalCost: cheapestDaysToDelivery,
-      daysToDeliver: cheapestTotalCost,
+      totalCost: cheapestTotalCost,
+      daysToDeliver: cheapestDaysToDelivery,
     } = await this.freightOperatorService.getMoreCheapOperator({
       distanceKM,
       cubicWeight,
@@ -47,6 +48,14 @@ export class FreightQuoteService {
 
     if (!cheapestOperator) {
       throw new Error('No cheapest freight operator found');
+    }
+
+    if (!cheapestTotalCost) {
+      throw new Error('Cannot calculate total cost for cheapest operator');
+    }
+
+    if (!cheapestDaysToDelivery) {
+      throw new Error('Cannot calculate days to deliver for cheapest operator');
     }
 
     const {
@@ -58,7 +67,7 @@ export class FreightQuoteService {
       cubicWeight,
     });
 
-    const data = {
+    const freightQuote = {
       moreFastOperator: fastestOperator,
       moreFastDaysToDelivery: fastestDaysToDelivery,
       moreFastTotalCost: fastestTotalCost,
@@ -66,17 +75,15 @@ export class FreightQuoteService {
       moreCheapDaysToDelivery: cheapestDaysToDelivery,
       moreCheapTotalCost: cheapestTotalCost,
       shopkeeper: shopkeeper,
-      heightCM: createFreightQuoteDto.heightCM,
-      widthCM: createFreightQuoteDto.widthCM,
-      lengthCM: createFreightQuoteDto.lengthCM,
+      heightCM: methodDto.heightCM,
+      widthCM: methodDto.widthCM,
+      lengthCM: methodDto.lengthCM,
       distanceKM,
       cubicWeight,
-      deliveryAddress: createFreightQuoteDto.deliveryAddress,
-      collectionAddress: createFreightQuoteDto.collectionAddress,
+      deliveryAddress: methodDto.deliveryAddress,
+      collectionAddress: methodDto.collectionAddress,
     };
 
-    const resp = await this.freightQuoteRepo.create(data);
-
-    return resp;
+    return await this.freightQuoteRepo.create(freightQuote);
   }
 }
